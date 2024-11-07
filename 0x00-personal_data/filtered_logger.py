@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Filter personal information using a Regex, Environmental variables, etc.
+This filter personal information using a Regex,
+Environmental variables, etc.
 """
 
 import re
@@ -12,7 +13,7 @@ import os
 
 class RedactingFormatter(logging.Formatter):
     """
-    Redacting Formatter class
+    the redacting Formatter class
     """
 
     REDACTION = "***"
@@ -41,7 +42,7 @@ PII_FIELDS = ('name', 'email', 'password', 'ssn', 'phone')
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """
-    Connect to mysql server with environmental vars
+    Connection to mysql server with environmental vars
     """
     db_connect = mysql.connector.connect(
         user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
@@ -57,7 +58,7 @@ def filter_datum(fields: List[str],
                  message: str,
                  separator: str) -> str:
     """
-    Returns the log message obfuscated with Regex
+    This returns the log message obfuscated with Regex
     """
     for item in fields:
         message = re.sub(item + '=.*?' + separator, item + '=' +
@@ -67,7 +68,7 @@ def filter_datum(fields: List[str],
 
 def get_logger() -> logging.Logger:
     """
-    Returns a Logger object with a
+    This returns a Logger object with a
     StreamHandler with RedactingFormatter
     as formatter
     """
