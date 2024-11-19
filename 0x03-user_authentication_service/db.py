@@ -34,7 +34,10 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
-        """ Return the first row that matches the argument passed """
+        """
+        This returns the first row that matches
+        the argument passed
+        """
         if kwargs is None:
             raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
@@ -43,7 +46,9 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """ locate the user to update, then will update the user’s attributes
+        """
+        This will locate the user to update
+        then will update the user’s attributes
         """
         user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
